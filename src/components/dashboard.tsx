@@ -1,5 +1,13 @@
 "use client";
-import { Layers, Compass, Building2, ClipboardList, Handshake, ArrowUpRight, ArrowRight } from "lucide-react";
+import {
+  Layers,
+  Compass,
+  Building2,
+  ClipboardList,
+  Handshake,
+  ArrowUpRight,
+  ArrowRight,
+} from "lucide-react";
 import { type Workspace } from "@/lib/queries";
 import { date } from "@/lib/format";
 import { Button } from "./ui";
@@ -21,6 +29,19 @@ export function Dashboard({
 }) {
   return (
     <>
+      {!team && (!data.user.profile.city || !data.user.profile.niche) && (
+        <section className="integration-panel creator-onboarding">
+          <h2>Vamos completar seu perfil?</h2>
+          <p>
+            Informe seus dados, nicho, cidade e portfólio para a equipe conhecer
+            seu trabalho e avaliar suas candidaturas.
+          </p>
+          <Button onClick={() => navigate("profile")}>
+            Completar meu perfil
+            <ArrowRight size={16} />
+          </Button>
+        </section>
+      )}
       {team ? (
         <AdminBanner onManage={() => navigate("market")} />
       ) : (
@@ -37,7 +58,8 @@ export function Dashboard({
             </h2>
             <p>
               Talentos, marcas e ideias. Tudo no mesmo lugar
-              <br className="desktop-break" /> para transformar possibilidades em projetos reais.
+              <br className="desktop-break" /> para transformar possibilidades
+              em projetos reais.
             </p>
             <Button onClick={() => navigate("market")}>
               Explorar oportunidades
@@ -111,7 +133,10 @@ export function Dashboard({
             </div>
           ))
         ) : (
-          <p className="muted">Seu histórico começa com a primeira conexão. As novidades aparecerão aqui.</p>
+          <p className="muted">
+            Seu histórico começa com a primeira conexão. As novidades aparecerão
+            aqui.
+          </p>
         )}
       </section>
     </>

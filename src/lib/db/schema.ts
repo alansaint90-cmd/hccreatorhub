@@ -14,15 +14,45 @@ import {
   type AnyPgColumn,
 } from "drizzle-orm/pg-core";
 
-export const roleEnum = pgEnum("role", ["super_admin", "admin", "operador", "visualizador", "creator"]);
-export const opportunityStatus = pgEnum("opportunity_status", ["Rascunho", "Publicada", "Encerrada"]);
-export const applicationStatus = pgEnum("application_status", ["Em análise", "Aprovado", "Reprovado"]);
-export const partnershipStatus = pgEnum("partnership_status", ["Aguardando aceite", "Em produção", "Concluída"]);
-export const deliveryStatus = pgEnum("delivery_status", ["Em análise", "Aprovado", "Ajuste solicitado"]);
-export const financeStatus = pgEnum("finance_status", ["Pendente", "Recebido", "Repassado"]);
-const auditFields = () => ({
-  createdAt: timestamp("created_at", { withTimezone: true, mode: "string" }).defaultNow().notNull(),
-  updatedAt: timestamp("updated_at", { withTimezone: true, mode: "string" }).defaultNow().notNull(),
+export const roleEnum = pgEnum("role", [
+  "super_admin",
+  "admin",
+  "operador",
+  "visualizador",
+  "creator",
+]);
+export const opportunityStatus = pgEnum("opportunity_status", [
+  "Rascunho",
+  "Publicada",
+  "Encerrada",
+]);
+export const applicationStatus = pgEnum("application_status", [
+  "Em análise",
+  "Aprovado",
+  "Reprovado",
+]);
+export const partnershipStatus = pgEnum("partnership_status", [
+  "Aguardando aceite",
+  "Em produção",
+  "Concluída",
+]);
+export const deliveryStatus = pgEnum("delivery_status", [
+  "Em análise",
+  "Aprovado",
+  "Ajuste solicitado",
+]);
+export const financeStatus = pgEnum("finance_status", [
+  "Pendente",
+  "Recebido",
+  "Repassado",
+]);
+export const auditFields = () => ({
+  createdAt: timestamp("created_at", { withTimezone: true, mode: "string" })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true, mode: "string" })
+    .defaultNow()
+    .notNull(),
   deletedAt: timestamp("deleted_at", { withTimezone: true, mode: "string" }),
   isDeleted: boolean("is_deleted").default(false).notNull(),
   modifiedBy: uuid("modified_by")
@@ -35,7 +65,10 @@ export const users = pgTable("users", {
   email: text("email").notNull().unique(),
   password: text("password").notNull(),
   role: roleEnum("role").notNull().default("creator"),
-  profile: jsonb("profile").$type<Record<string, string>>().notNull().default({}),
+  profile: jsonb("profile")
+    .$type<Record<string, string>>()
+    .notNull()
+    .default({}),
   ...auditFields(),
 });
 export const sessions = pgTable("sessions", {
@@ -44,7 +77,10 @@ export const sessions = pgTable("sessions", {
   userId: uuid("user_id")
     .notNull()
     .references(() => users.id, { onDelete: "restrict" }),
-  expiresAt: timestamp("expires_at", { withTimezone: true, mode: "string" }).notNull(),
+  expiresAt: timestamp("expires_at", {
+    withTimezone: true,
+    mode: "string",
+  }).notNull(),
   ...auditFields(),
 });
 export const companies = pgTable("companies", {
@@ -101,7 +137,10 @@ export const applications = pgTable(
     ...auditFields(),
   },
   (t) => [
-    uniqueIndex("application_creator_opportunity").on(t.creatorId, t.opportunityId),
+    uniqueIndex("application_creator_opportunity").on(
+      t.creatorId,
+      t.opportunityId,
+    ),
     index("application_creator_idx").on(t.creatorId),
   ],
 );
@@ -114,7 +153,13 @@ export const proposals = pgTable(
       .references(() => applications.id, { onDelete: "restrict" }),
     version: integer("version").notNull(),
     body: jsonb("body")
-      .$type<{ creator: string; campaign: string; scope: string; reward: string; deadline: string }>()
+      .$type<{
+        creator: string;
+        campaign: string;
+        scope: string;
+        reward: string;
+        deadline: string;
+      }>()
       .notNull(),
     ...auditFields(),
   },
@@ -160,8 +205,14 @@ export const finance = pgTable(
     ...auditFields(),
   },
   (t) => [
-    check("nonnegative_amounts", sql`${t.companyCents} >= 0 AND ${t.platformCents} >= 0 AND ${t.creatorCents} >= 0`),
-    check("balanced_amounts", sql`${t.companyCents} = ${t.platformCents} + ${t.creatorCents}`),
+    check(
+      "nonnegative_amounts",
+      sql`${t.companyCents} >= 0 AND ${t.platformCents} >= 0 AND ${t.creatorCents} >= 0`,
+    ),
+    check(
+      "balanced_amounts",
+      sql`${t.companyCents} = ${t.platformCents} + ${t.creatorCents}`,
+    ),
   ],
 );
 export const links = pgTable("links", {
@@ -193,3 +244,37 @@ export const auditLog = pgTable("audit_log", {
   entityId: uuid("entity_id").notNull(),
   ...auditFields(),
 });
+
+export const offerInvites = pgTable("offer_invites", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  companyId: uuid("company_id")
+    .notNull()
+    .references(() => companies.id, { onDelete: "restrict" }),
+  tokenHash: text("token_hash").notNull().unique(),
+  expiresAt: timestamp("expires_at", {
+    withTimezone: true,
+    mode: "string",
+  }).notNull(),
+  ...auditFields(),
+});
+export const companyOffers = pgTable(
+  "company_offers",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    inviteId: uuid("invite_id")
+      .notNull()
+      .references(() => offerInvites.id, { onDelete: "restrict" }),
+    companyId: uuid("company_id")
+      .notNull()
+      .references(() => companies.id, { onDelete: "restrict" }),
+    contactName: text("contact_name").notNull(),
+    contactEmail: text("contact_email").notNull(),
+    title: text("title").notNull(),
+    details: jsonb("details").$type<OpportunityDetails>().notNull(),
+    opportunityId: uuid("opportunity_id").references(() => opportunities.id, {
+      onDelete: "restrict",
+    }),
+    ...auditFields(),
+  },
+  (t) => [index("company_offer_company_idx").on(t.companyId)],
+);

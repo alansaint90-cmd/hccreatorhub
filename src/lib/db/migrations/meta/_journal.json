@@ -15,6 +15,13 @@
       "when": 1793372579279,
       "tag": "0001_oval_bishop",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794354194737,
+      "tag": "0002_free_titanium_man",
+      "breakpoints": true
     }
   ]
 }

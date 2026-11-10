@@ -8,11 +8,13 @@ import { loginSchema, registerSchema } from "./validators";
 import { digest, hashPassword, verifyPassword } from "./security";
 import { requireSession } from "./auth";
 import { errorMessage } from "./errors";
+import { sharedAttempt } from "./redis";
 const attempts = new Map<string, { count: number; until: number }>();
 export async function authenticate(input: unknown, register = false) {
   try {
     const h = await headers();
     const key = digest((h.get("x-forwarded-for") ?? "local").split(",")[0]);
+    await sharedAttempt(`auth:${key}`, 15, 900);
     const previous = attempts.get(key);
     const attempt = previous && previous.until > Date.now() ? previous : { count: 0, until: Date.now() + 900000 };
     if (attempt.count >= 15) throw new Error("Muitas tentativas. Aguarde 15 minutos.");

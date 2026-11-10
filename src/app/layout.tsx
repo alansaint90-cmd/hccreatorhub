@@ -18,6 +18,7 @@ import "./admin-banner.css";
 import "./auth-photo.css";
 import "./brand-refresh.css";
 import "./install.css";
+import "./company-offers.css";
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,

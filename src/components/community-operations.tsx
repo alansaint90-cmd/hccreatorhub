@@ -5,8 +5,15 @@ import { downloadCsv } from "@/lib/format";
 import { Button, Badge, Empty, Pagination } from "./ui";
 import { useOperationFilters, type Props } from "./operation-filters";
 import { CreatorDirectory } from "./creator-directory";
+import { CompanyOffers } from "./company-offers";
+import { isAdministrator } from "@/lib/offer-validation";
 
-const stageOptions = ["Prospecção", "Contato feito", "Em negociação", "Contrato"].map((v) => ({ label: v, value: v }));
+const stageOptions = [
+  "Prospecção",
+  "Contato feito",
+  "Em negociação",
+  "Contrato",
+].map((v) => ({ label: v, value: v }));
 export function CommunityOperations(props: Props) {
   const {
     view,
@@ -27,10 +34,15 @@ export function CommunityOperations(props: Props) {
   } = useOperationFilters(props);
   if (view === "companies") {
     const rows = data.companies.filter(
-      (c) => search(c.name + " " + c.segment + " " + c.contact) && (!status || c.stage === status),
+      (c) =>
+        search(c.name + " " + c.segment + " " + c.contact) &&
+        (!status || c.stage === status),
     );
     return (
       <>
+        {isAdministrator(data.user.role) && (
+          <CompanyOffers companies={data.companies} />
+        )}
         {filters(
           "Buscar empresa, segmento ou responsável",
           stageOptions.map((o) => o.value),
@@ -76,9 +88,21 @@ export function CommunityOperations(props: Props) {
                                 openForm(
                                   "Atualizar etapa comercial",
                                   "company-stage",
-                                  [{ name: "stage", label: "Etapa", type: "select", options: stageOptions }],
+                                  [
+                                    {
+                                      name: "stage",
+                                      label: "Etapa",
+                                      type: "select",
+                                      options: stageOptions,
+                                    },
+                                  ],
                                   z.object({
-                                    stage: z.enum(["Prospecção", "Contato feito", "Em negociação", "Contrato"]),
+                                    stage: z.enum([
+                                      "Prospecção",
+                                      "Contato feito",
+                                      "Em negociação",
+                                      "Contrato",
+                                    ]),
                                   }),
                                   { id: c.id, updatedAt: c.updatedAt },
                                   { stage: c.stage },
@@ -90,7 +114,13 @@ export function CommunityOperations(props: Props) {
                             <Button
                               variant="ghost"
                               aria-label={`Arquivar ${c.name}`}
-                              onClick={() => confirm("Arquivar empresa?", "archive-company", c)}
+                              onClick={() =>
+                                confirm(
+                                  "Arquivar empresa?",
+                                  "archive-company",
+                                  c,
+                                )
+                              }
                             >
                               <Archive size={16} />
                             </Button>
@@ -110,7 +140,13 @@ export function CommunityOperations(props: Props) {
                 setQuery("");
                 setStatus("");
               }}
-              action={manage ? <Button onClick={newCompany}>Cadastrar primeira empresa</Button> : undefined}
+              action={
+                manage ? (
+                  <Button onClick={newCompany}>
+                    Cadastrar primeira empresa
+                  </Button>
+                ) : undefined
+              }
             />
           )}
         </div>
