@@ -51,3 +51,11 @@ No navegador foram exercitados login, cadastro de empresa e oportunidade, cadast
 - Identidade visual HC Agency: tokens centrais verde #C7F000, preto #101010, magenta #F72585, branco #FFFFFF e fundo #F5F5F5. Magenta em destaques e ações secundárias; status mantêm cores semânticas. Ilustrações 3D somente nas imagens. Empresas continuam sem login, gerenciadas pela equipe.
 
 - App instalável (PWA) compartilha rotas, autenticação e permissões do sistema web. Requer HTTPS em produção; localhost só permite instalação no próprio computador. Dados de contas, páginas autenticadas, materiais e mutações nunca são armazenados pelo service worker. Somente o aviso público /offline pode ser armazenado. Instalação depende do suporte do navegador; Safari recebe instruções para Tela de Início ou Dock. Sem conexão, a operação exige reconexão e não promete salvar alterações offline.
+
+## Produção no EasyPanel
+
+- Build pelo Dockerfile na raiz. Aplicação escuta 0.0.0.0 na porta 3000; domínio do EasyPanel deve apontar à porta interna 3000, com HTTPS.
+- Criar serviço PostgreSQL 16 separado e configurar DATABASE_URL com o host interno do serviço, usuário, senha e banco. Nunca usar 127.0.0.1 para o banco de outro container.
+- Definir ADMIN_EMAIL e ADMIN_PASSWORD (pelo menos 12 caracteres) nas variáveis de ambiente do serviço. O primeiro início aplica migrações e cria a conta administrativa com auditoria. Reinícios não alteram senhas, permissões nem registros já existentes. Sem essas variáveis, as tabelas são criadas, mas não há conta inicial da equipe.
+- Configurar volume persistente em /app/.local/uploads para banners enviados. O banco deve ter armazenamento persistente próprio. O container roda com usuário node (UID 1000); o volume precisa permitir escrita para esse usuário.
+- Segredos são fornecidos em runtime: .env, .local e capturas ficam fora do contexto Docker. O build não precisa acessar o banco. A tela inicial lê a configuração de banco por requisição.
