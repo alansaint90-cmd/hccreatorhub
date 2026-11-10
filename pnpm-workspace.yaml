@@ -2,4 +2,7 @@ allowBuilds:
   esbuild: true
   unrs-resolver: true
   '@embedded-postgres/windows-x64': true
+  # Production connects to the EasyPanel PostgreSQL service, not a portable local server.
+  '@embedded-postgres/linux-x64': false
+  '@embedded-postgres/linux-arm64': false
 verifyDepsBeforeRun: false
