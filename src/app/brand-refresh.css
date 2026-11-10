@@ -1,0 +1,177 @@
+/* Brand accents are separate from semantic success, warning and error colors. */
+:root {
+  --focus-ring: var(--magenta-text);
+}
+::selection {
+  background: var(--magenta);
+  color: var(--carbon);
+}
+.button.outline {
+  border-color: var(--magenta-text);
+  color: var(--magenta-text);
+}
+.button.outline:hover {
+  background: var(--magenta-wash);
+  border-color: var(--magenta-text);
+}
+.button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+.app-shell .sidebar button:focus-visible {
+  outline-color: var(--magenta);
+}
+.app-shell .sidebar nav button.active {
+  box-shadow: inset 4px 0 var(--magenta);
+}
+.activity-dot {
+  background: var(--magenta);
+}
+.campaign-cover .demo-badge {
+  background: var(--magenta-wash);
+  color: var(--magenta-text);
+}
+.auth-switch button {
+  color: var(--magenta-text);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.auth-switch button:hover {
+  background: var(--magenta-wash);
+}
+.admin-hero {
+  position: relative;
+  background: var(--carbon);
+  border: 1px solid var(--border);
+}
+.admin-hero .admin-hero-mobile {
+  display: block;
+  min-height: 350px;
+  position: relative;
+  isolation: isolate;
+}
+.admin-hero .admin-hero-mobile-art {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 48%;
+  z-index: -1;
+  height: 100%;
+  background: url("/images/hc-admin-influencer.webp") center bottom / contain
+    no-repeat;
+}
+.admin-hero-watermark {
+  position: absolute;
+  right: 24%;
+  top: 50%;
+  width: 32%;
+  height: 100%;
+  transform: translateY(-50%) rotate(-12deg);
+  color: var(--primary);
+  opacity: 1;
+  z-index: -2;
+  pointer-events: none;
+}
+.admin-hero .admin-hero-mobile-copy {
+  padding: 40px;
+  max-width: 56%;
+}
+.admin-hero-mobile-copy > span {
+  color: var(--primary);
+  font-size: 10px;
+  letter-spacing: 0.13em;
+  font-weight: 700;
+}
+.admin-hero-mobile-copy h2 {
+  color: var(--soft-white);
+  font-size: clamp(30px, 3vw, 44px);
+  line-height: 1.06;
+  letter-spacing: -0.05em;
+  margin: 20px 0 16px;
+  font-weight: 900;
+}
+.admin-hero-mobile-copy p {
+  color: #e4e3df;
+  font-size: 13px;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.app-shell .hero-banner-photo {
+  background-color: var(--carbon);
+  background-image:
+    linear-gradient(
+      90deg,
+      var(--carbon) 0%,
+      var(--carbon) 35%,
+      transparent 75%
+    ),
+    url("/images/hc-creator-magenta.webp");
+  background-size:
+    100% 100%,
+    auto 100%;
+  background-position:
+    center,
+    right center;
+}
+.app-shell .hero-banner-photo > div:first-child {
+  max-width: 58%;
+}
+.app-shell .hero-banner-photo h2 {
+  font-size: clamp(28px, 3vw, 42px);
+}
+.app-shell .hero-banner-photo .hero-pill {
+  color: var(--primary);
+}
+.app-shell .hero-banner-photo .hero-pill span {
+  background: var(--magenta);
+}
+@media (max-width: 767px) {
+  .admin-hero-watermark {
+    top: 0;
+    right: 39%;
+    width: 58%;
+    height: 240px;
+    transform: rotate(-12deg);
+  }
+  .admin-hero .admin-hero-mobile {
+    padding-top: 240px;
+  }
+  .admin-hero .admin-hero-mobile-art {
+    width: 100%;
+    height: 240px;
+    background-position: center bottom;
+  }
+  .admin-hero .admin-hero-mobile-copy {
+    padding: 25px;
+    max-width: 100%;
+    background: var(--carbon);
+  }
+  .app-shell .hero-banner-photo {
+    padding-top: 210px;
+    background-size:
+      100% 100%,
+      auto 230px;
+    background-position:
+      center,
+      right top;
+    background-image:
+      linear-gradient(0deg, var(--carbon) 45%, transparent 80%),
+      url("/images/hc-creator-magenta.webp");
+  }
+  .app-shell .hero-banner-photo > div:first-child {
+    max-width: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}

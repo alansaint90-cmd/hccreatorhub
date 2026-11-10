@@ -1,0 +1,1 @@
+ALTER TABLE "finance" ADD CONSTRAINT "balanced_amounts" CHECK ("finance"."company_cents" = "finance"."platform_cents" + "finance"."creator_cents");

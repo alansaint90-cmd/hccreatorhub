@@ -1,0 +1,159 @@
+.auth-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+.auth-story {
+  position: relative;
+  overflow: hidden;
+  padding: 42px 55px;
+  background: var(--hero);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 750px;
+}
+.auth-copy {
+  position: relative;
+  z-index: 2;
+  max-width: 560px;
+  margin: 70px 0;
+}
+.auth-copy h1 {
+  font-size: 49px;
+  letter-spacing: -0.055em;
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 24px 0;
+}
+.auth-copy em {
+  color: var(--primary-text);
+  font-style: normal;
+}
+.auth-copy > p {
+  color: var(--muted-foreground);
+  font-size: 14px;
+  max-width: 350px;
+  line-height: 1.9;
+}
+.story-points {
+  margin-top: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+  font-size: 12px;
+}
+.story-points > div {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.story-points svg {
+  color: var(--primary-text);
+}
+.auth-story > footer {
+  font-size: 11px;
+  color: var(--muted-foreground);
+  z-index: 2;
+}
+.auth-art {
+  position: absolute;
+  width: 390px;
+  height: 390px;
+  right: -220px;
+  bottom: 30px;
+  transform: rotate(-20deg);
+}
+.auth-art span {
+  display: block;
+  border: 1px solid var(--brand-line);
+  position: absolute;
+  inset: 0;
+  border-radius: 80px;
+}
+.auth-art span:nth-child(2) {
+  inset: 35px;
+}
+.auth-art span:nth-child(3) {
+  inset: 70px;
+}
+.auth-art span:nth-child(4) {
+  inset: 105px;
+  background: var(--brand-wash);
+}
+.auth-form {
+  background: var(--card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 45px;
+}
+.auth-form-inner {
+  max-width: 365px;
+  width: 100%;
+}
+.auth-form h2 {
+  font-size: 28px;
+  margin: 14px 0 12px;
+}
+.auth-form-inner > p {
+  font-size: 12px;
+  color: var(--muted-foreground);
+  line-height: 1.8;
+}
+.auth-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 30px;
+}
+.auth-form form .button {
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 4px;
+  padding: 15px 20px;
+}
+.auth-switch {
+  margin-top: 28px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--muted-foreground);
+}
+.auth-switch button {
+  border: 0;
+  background: none;
+  padding: 5px;
+  color: var(--primary-text);
+  font-weight: 500;
+}
+.auth-form .secure-note {
+  margin-top: 45px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-size: 10px;
+}
+.connection-error {
+  padding: 12px 25px;
+  background: var(--peach);
+  font-size: 12px;
+  color: var(--danger);
+}
+.print-sheet {
+  padding: 15px 5px;
+}
+.print-sheet h2 {
+  margin: 20px 0;
+}
+.print-sheet h3 {
+  margin: 20px 0 10px;
+}
+.print-sheet p {
+  font-size: 13px;
+  line-height: 1.8;
+}
+.sidebar-overlay {
+  display: none;
+}

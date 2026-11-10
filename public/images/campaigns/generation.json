@@ -1,0 +1,9 @@
+{
+  "tool": "image_gen.imagegen (built-in)",
+  "purpose": "Banners ilustrativos das marcas fictícias da HC Agency",
+  "assets": [
+    {"file":"leve-lava.webp","prompt":"Create a polished photorealistic horizontal 16:9 advertising banner for a fictional Brazilian laundry brand named Leve Lava. Bright premium modern laundromat, clean front-loading washers, neatly folded white towels, a basket with fresh clothes, subtle lime green brand accents with warm neutral colors. Realistic editorial commercial photography, crisp inviting light. No people, no words, no logos, no watermarks. Balanced image composed for an opportunity card, no UI."},
+    {"file":"brand-experience.webp","prompt":"Create a polished photorealistic horizontal 16:9 advertising banner for a fictional Brazilian beauty and self-care brand named Brand Experience. Premium skincare still-life: elegant unbranded glass serum dropper bottles and moisturizer jars, pale lavender sculptural plinths, soft towels, small botanical sprig. Soft studio light and realistic cosmetic textures, sophisticated lavender, cream and subtle lime palette. No people, no words, no logos, no watermarks. Commercial editorial photograph for a campaign opportunity card, no UI."},
+    {"file":"lifestyle-movimento.webp","prompt":"Create a polished photorealistic horizontal 16:9 advertising banner for a fictional Brazilian running brand named Lifestyle em Movimento. Two adult runners in modern black and lime athletic clothes running on a park track in early morning sun, energetic natural movement and sporty premium campaign photography, greenery and subtle motion depth. No visible real brand logos, no words, no watermarks. Composed as an aspirational running campaign opportunity card image, no UI."}
+  ]
+}

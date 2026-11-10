@@ -1,0 +1,68 @@
+.app-install-button {
+  position: fixed;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  right: max(18px, env(safe-area-inset-right));
+  z-index: 30;
+  box-shadow: 0 3px 16px #10101018;
+  background: var(--card);
+  min-height: 44px;
+}
+.app-install-help {
+  padding: 24px;
+  max-width: 560px;
+}
+.app-install-help p {
+  margin: 0 0 20px;
+  line-height: 1.7;
+}
+.app-install-note {
+  color: var(--muted-foreground);
+  font-size: 13px;
+}
+.app-offline-notice {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 100;
+  background: var(--carbon);
+  color: var(--soft-white);
+  border-bottom: 3px solid var(--magenta);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+body {
+  min-height: 100dvh;
+}
+.content-footer {
+  padding-bottom: 75px;
+}
+@media (display-mode: standalone) {
+  .topbar {
+    padding-top: env(safe-area-inset-top);
+  }
+  .app-install-button {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  .app-install-button {
+    position: static;
+    display: flex;
+    margin: 12px 12px 12px auto;
+    font-size: 12px;
+    padding: 10px 14px;
+  }
+  .auth-form {
+    padding-bottom: calc(90px + env(safe-area-inset-bottom));
+  }
+  dialog {
+    max-height: calc(100dvh - 32px);
+  }
+  .app-install-help {
+    padding: 20px;
+  }
+}

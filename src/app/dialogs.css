@@ -1,0 +1,143 @@
+dialog {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 25px;
+  max-width: 660px;
+  width: calc(100% - 32px);
+  max-height: 90dvh;
+  overflow: auto;
+  background: var(--card);
+  color: var(--foreground);
+  box-shadow: 0 30px 90px #17112133;
+}
+dialog::backdrop {
+  background: #17112170;
+  backdrop-filter: blur(4px);
+}
+.dialog-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 18px;
+  margin-bottom: 20px;
+}
+.dialog-header h2 {
+  font-size: 20px;
+}
+.dialog-header p {
+  font-size: 12px;
+  color: var(--muted-foreground);
+  margin-top: 7px;
+}
+.dialog-header .button {
+  padding: 7px;
+  min-height: 30px;
+}
+.dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 23px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+dialog > p {
+  font-size: 13px;
+  line-height: 1.8;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+.span-full {
+  grid-column: 1/-1;
+}
+.required {
+  color: var(--danger);
+}
+.field-error {
+  font-size: 11px;
+  color: var(--danger);
+  font-weight: 400;
+}
+.field-error:empty {
+  display: none;
+}
+.record-form label {
+  display: block;
+}
+.record-form input,
+.record-form select,
+.record-form textarea {
+  display: block;
+  margin-top: 7px;
+}
+.record-form small {
+  display: block;
+  margin-top: 4px;
+}
+.detail-content p {
+  font-size: 13px;
+  line-height: 1.8;
+  margin: 14px 0 20px;
+}
+.detail-content h3 {
+  margin-top: 20px;
+}
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--background);
+  padding: 18px;
+  border-radius: 10px;
+}
+.notice {
+  border: 1px solid var(--border);
+  background: var(--accent);
+  color: var(--foreground);
+  padding: 15px 18px;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.8;
+  margin: 20px 0;
+}
+.notice.error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--peach);
+  color: var(--danger);
+  margin-top: 0;
+}
+.refresh-status {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  margin-bottom: 15px;
+  color: var(--muted-foreground);
+  font-size: 11px;
+}
+.spin {
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.loading-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  color: var(--primary-text);
+}
+.mobile-menu {
+  display: none;
+}

@@ -1,0 +1,45 @@
+.app-shell .hero-banner-photo {
+  min-height: 360px;
+  isolation: isolate;
+  background-color: #080b07;
+  background-image:
+    linear-gradient(90deg, rgb(5 8 5 / 92%) 0%, rgb(5 8 5 / 72%) 35%, rgb(5 8 5 / 12%) 65%, transparent 100%),
+    url("/images/hs-creator-banner.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%, auto 140%;
+  background-position: center, right 35%;
+  border-color: var(--carbon);
+  color: var(--soft-white);
+}
+.app-shell .hero-banner-photo > div:first-child {
+  max-width: 65%;
+}
+.app-shell .hero-banner-photo .hero-pill {
+  color: var(--primary);
+}
+.app-shell .hero-banner-photo p {
+  color: #e4e3df;
+  max-width: 400px;
+}
+@media (max-width: 1000px) {
+  .app-shell .hero-banner-photo {
+    background-size: 100% 100%, auto 125%;
+    background-position: center, 70% 30%;
+  }
+  .app-shell .hero-banner-photo > div:first-child {
+    max-width: 80%;
+  }
+}
+@media (max-width: 767px) {
+  .app-shell .hero-banner-photo {
+    min-height: 430px;
+    background-image:
+      linear-gradient(90deg, rgb(5 8 5 / 92%) 0%, rgb(5 8 5 / 80%) 45%, rgb(5 8 5 / 38%) 100%),
+      url("/images/hs-creator-banner.png");
+    background-size: 100% 100%, auto 100%;
+    background-position: center, 68% center;
+  }
+  .app-shell .hero-banner-photo > div:first-child {
+    max-width: 100%;
+  }
+}

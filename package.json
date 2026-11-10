@@ -1,0 +1,44 @@
+{
+  "name": "creator-hub",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1",
+    "build": "next build",
+    "start": "next start --hostname 127.0.0.1",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src tests scripts",
+    "test": "tsx --test tests/*.test.ts",
+    "db:generate": "drizzle-kit generate --config=config/drizzle.config.ts",
+    "db:migrate": "drizzle-kit migrate --config=config/drizzle.config.ts",
+    "db:seed": "tsx scripts/seed.ts",
+    "db:local": "tsx scripts/local-db.ts",
+    "format": "prettier --write src/components src/lib --ignore-path .gitignore"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "6.0.2",
+    "drizzle-orm": "0.45.4",
+    "lucide-react": "1.64.0",
+    "next": "16.4.3",
+    "postgres": "3.4.9",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-hook-form": "7.91.0",
+    "sharp": "0.35.5",
+    "sonner": "2.0.8",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "dotenv": "18.0.9",
+    "drizzle-kit": "0.31.11",
+    "embedded-postgres": "16.14.0-beta.17",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.4.3",
+    "prettier": "3.9.10",
+    "tsx": "4.23.15",
+    "typescript": "6.0.3"
+  }
+}

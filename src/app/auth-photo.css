@@ -1,0 +1,106 @@
+.auth-story {
+  isolation: isolate;
+  background: var(--carbon);
+  color: var(--soft-white);
+  min-width: 0;
+  min-height: 750px;
+}
+.auth-story .auth-copy {
+  margin: 70px 0;
+  max-width: 58%;
+  min-width: 0;
+}
+.auth-story .auth-copy h1 {
+  font-size: clamp(30px, 3.2vw, 52px);
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.auth-story .eyebrow,
+.auth-story .auth-copy em,
+.auth-story .story-points svg {
+  color: var(--primary);
+}
+.auth-story .auth-copy > p,
+.auth-story > footer {
+  color: var(--soft-white);
+}
+.auth-story .auth-copy em {
+  font-style: normal;
+}
+.auth-story .hs-brand-symbol {
+  background: var(--primary);
+  color: var(--carbon);
+}
+.auth-creator-photo {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: url("/images/hc-login-creator.png") 60% center / cover no-repeat;
+}
+.auth-story::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    90deg,
+    rgb(16 16 16 / 94%),
+    rgb(16 16 16 / 72%) 35%,
+    rgb(16 16 16 / 12%) 65%,
+    transparent
+  );
+}
+.auth-story .story-points {
+  max-width: 100%;
+  margin-top: 35px;
+}
+.auth-story .story-points svg {
+  flex-shrink: 0;
+}
+.auth-story > footer {
+  position: relative;
+}
+.auth-form {
+  min-width: 0;
+}
+@media (max-width: 1199px) {
+  .auth-story {
+    min-height: 900px;
+  }
+  .auth-story .auth-copy {
+    max-width: 100%;
+    margin: 45px 0 auto;
+    padding-bottom: 300px;
+  }
+  .auth-story .auth-copy h1 {
+    font-size: clamp(30px, 3.6vw, 42px);
+  }
+  .auth-creator-photo {
+    inset: auto 0 0;
+    height: 43%;
+    background-position: 70% center;
+  }
+  .auth-story::after {
+    background: linear-gradient(
+      0deg,
+      rgb(16 16 16 / 10%),
+      transparent 35%,
+      var(--carbon) 50%
+    );
+  }
+}
+@media (max-width: 767px) {
+  .auth-story {
+    min-height: 760px;
+  }
+  .auth-story .auth-copy {
+    margin: 30px 0 0;
+    padding-bottom: 310px;
+  }
+  .auth-story .auth-copy h1 {
+    font-size: clamp(30px, 7.6vw, 42px);
+  }
+  .auth-creator-photo {
+    height: 44%;
+  }
+}

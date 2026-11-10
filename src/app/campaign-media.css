@@ -1,0 +1,139 @@
+.campaign-image {
+  object-fit: cover;
+}
+.campaign-image-fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: var(--cool-gray);
+  color: var(--carbon);
+  font-size: 12px;
+}
+.campaign-cover.has-banner {
+  min-height: 190px;
+}
+.has-banner .cover-top {
+  z-index: 1;
+}
+.campaign-cover.has-banner .cover-status {
+  background: var(--card);
+  color: var(--foreground);
+  padding: 4px 8px;
+  border-radius: 999px;
+}
+.banner-field {
+  margin-top: 10px;
+}
+.banner-preview,
+.campaign-detail-banner {
+  position: relative;
+  height: 210px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--muted);
+  border: 1px solid var(--border);
+}
+.banner-preview > span {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted-foreground);
+  font-size: 13px;
+}
+.banner-upload-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 12px;
+}
+.field-help {
+  color: var(--muted-foreground);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+.campaign-materials {
+  margin: 20px 0;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--background);
+}
+.campaign-materials h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+}
+.campaign-materials > p {
+  margin: 8px 0 13px;
+  font-size: 12px;
+}
+.campaign-materials > div {
+  display: grid;
+  gap: 8px;
+}
+.campaign-materials a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.campaign-materials a:hover {
+  background: var(--accent);
+}
+.campaign-materials-locked {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 15px;
+  margin: 20px 0;
+  background: var(--muted);
+  border-radius: 12px;
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.campaign-materials-locked p {
+  margin: 0;
+}
+.demo-material-page {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 35px 20px 60px;
+}
+.demo-material-page h1,
+.demo-material-page h2,
+.demo-material-page h3 {
+  margin: 20px 0 12px;
+}
+.demo-material-page p,
+.demo-material-page li {
+  line-height: 1.8;
+  color: var(--muted-foreground);
+}
+.demo-material-image {
+  position: relative;
+  height: 350px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin: 25px 0;
+}
+.demo-material-image img {
+  object-fit: cover;
+}
+@media (max-width: 767px) {
+  .banner-preview,
+  .campaign-detail-banner {
+    height: 175px;
+  }
+}

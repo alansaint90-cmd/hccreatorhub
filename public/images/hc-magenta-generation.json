@@ -1,0 +1,13 @@
+{
+  "tool": "image_gen built-in",
+  "assets": [
+    {
+      "path": "/images/hc-creator-magenta.webp",
+      "prompt": "Use case: ads-marketing. Asset type: HC Agency creator platform login and dashboard photo art, no text. Create a premium editorial photograph of an adult female content creator with long dark hair, wearing a black contemporary jacket, holding a phone and smiling naturally. Three glossy hot magenta #F72585 sculptural objects (a large floating speech bubble, a small heart, a ring) around her, physical shiny 3D finish only on these image objects. Solid vivid lime #C7F000 seamless studio backdrop. Composition ultra wide 2:1, woman occupies RIGHT THIRD, her entire head and hair with generous top clearance, LEFT 55% absolutely clean flat lime negative space for HTML headlines. High-end real photographic skin and studio light, bold modern creative agency aesthetic. Black #101010 and magenta accents. No words, letters, logos, watermark or interface. Keep face clear and uncropped."
+    },
+    {
+      "path": "/images/hc-admin-magenta.webp",
+      "prompt": "Use case: stylized-concept. Asset type: wide internal HC Agency admin banner artwork. Premium glossy magenta #F72585 3D megaphone and linked rounded rectangular black tiles with small lime #C7F000 shapes, floating in a refined studio composition on deep black #101010 background. Lime rim lights, elegant reflective details, no readable text, no fake UI labels, no logos. Main sculptural objects on RIGHT HALF, LEFT HALF clean black negative space for real HTML text. Creative modern bold agency aesthetic, not purple. Wide 2:1."
+    }
+  ]
+}

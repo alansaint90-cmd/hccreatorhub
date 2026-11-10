@@ -1,0 +1,51 @@
+@media (max-width: 767px) {
+  .sidebar {
+    visibility: hidden;
+  }
+  .sidebar-open {
+    visibility: visible;
+  }
+  .button {
+    min-height: 44px;
+  }
+  .topbar-actions .button {
+    min-width: 40px;
+    min-height: 44px;
+  }
+  .row-actions .button {
+    min-height: 44px;
+  }
+  .activity-row {
+    align-items: flex-start;
+  }
+}
+.sidebar nav button,
+.settings-link {
+  font-size: 13px;
+}
+.opportunity-body > p,
+.hero-banner p {
+  font-size: 12px;
+}
+.kpi dt {
+  font-size: 11px;
+}
+.eyebrow,
+.page-heading .eyebrow,
+.nav-caption,
+.tiny-label,
+.hero-pill {
+  font-size: 10px;
+}
+.sidebar-foot,
+.sidebar-note button,
+.workspace-plan,
+.campaign-cover .badge,
+.cover-status,
+.chips > span,
+.campaign-meta,
+.opportunity-body footer small,
+.content-footer,
+.table-panel th {
+  font-size: 10px;
+}

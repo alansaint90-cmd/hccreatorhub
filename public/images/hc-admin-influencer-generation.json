@@ -1,0 +1,5 @@
+{
+  "tool": "image_gen built-in",
+  "asset": "/images/hc-admin-influencer.webp",
+  "prompt": "Edit target: supplied HC creator art. Preserve the adult woman from this image, smiling face, long dark hair, black jacket and phone. Create a clean cutout of her from waist up, with a continuous elegant hot pink magenta #F72585 outline around her silhouette (like a premium editorial sticker). Remove the lime background completely, REAL TRANSPARENT background alpha. Remove speech bubble and ring; instead place a small glossy magenta megaphone floating to her right and a small lime #C7F000 sphere below it. Woman fills central composition, entire head visible with generous top clearance, no text, no logos, no frame, no background glow rectangle. Asset for right half of a black admin website banner. Photographic skin, glossy 3D only on megaphone. Transparent background everywhere outside woman, outline and props."
+}

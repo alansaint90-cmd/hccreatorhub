@@ -1,0 +1,79 @@
+.admin-hero {
+  overflow: hidden;
+  border-radius: 20px;
+  background: #050805;
+  color: var(--soft-white);
+}
+.admin-hero-desktop {
+  position: relative;
+}
+.admin-hero-desktop > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.admin-hero-image-action {
+  position: absolute;
+  left: 4.35%;
+  top: 71.5%;
+  width: 18.8%;
+  height: 12%;
+  padding: 0;
+  border: 0;
+  border-radius: 14px;
+  background: transparent;
+  cursor: pointer;
+}
+.admin-hero-image-action:hover {
+  background: rgb(23 23 23 / 8%);
+}
+.admin-hero-image-action:focus-visible {
+  outline: 3px solid var(--soft-white);
+  outline-offset: 4px;
+}
+.admin-hero-image-action > span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.admin-hero-mobile {
+  display: none;
+}
+@media (max-width: 767px) {
+  .admin-hero-desktop {
+    display: none;
+  }
+  .admin-hero-mobile {
+    display: block;
+  }
+  .admin-hero-mobile-art {
+    height: 165px;
+    background-image: url("/images/hc-admin-banner.png");
+    background-size: auto 215%;
+    background-position: right center;
+    background-repeat: no-repeat;
+  }
+  .admin-hero-mobile-copy {
+    padding: 15px 23px 27px;
+  }
+  .admin-hero-mobile-copy > span {
+    color: var(--primary);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+  }
+  .admin-hero-mobile-copy h2 {
+    font-size: 30px;
+    line-height: 1.1;
+    letter-spacing: -0.045em;
+    margin: 15px 0;
+  }
+  .admin-hero-mobile-copy p {
+    color: var(--cool-gray);
+    font-size: 12px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+}
