@@ -257,6 +257,13 @@ export const offerInvites = pgTable("offer_invites", {
   }).notNull(),
   ...auditFields(),
 });
+export const companyRegistrationInvites = pgTable("company_registration_invites", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  tokenHash: text("token_hash").notNull().unique(),
+  expiresAt: timestamp("expires_at", { withTimezone: true, mode: "string" }).notNull(),
+  companyId: uuid("company_id").references(() => companies.id, { onDelete: "restrict" }),
+  ...auditFields(),
+});
 export const companyOffers = pgTable(
   "company_offers",
   {

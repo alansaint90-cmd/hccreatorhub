@@ -71,3 +71,11 @@ No navegador foram exercitados login, cadastro de empresa e oportunidade, cadast
 - O diagnóstico reflete apenas o ambiente em que foi executado, não presume que os serviços remotos estejam saudáveis e nunca retorna URLs de conexão ou senhas. A migração 0002 adiciona apenas as duas tabelas do novo fluxo, preservando dados existentes.
 
 - Creators sem cidade ou nicho recebem uma chamada para completar o perfil na visão geral. O bloqueio de candidatura por perfil incompleto permanece no servidor.
+
+### Cadastro externo de empresas
+- Em Empresas → Cadastrar empresa, a administração pode preencher manualmente ou gerar e copiar um link de cadastro para uma empresa nova, sem cadastro prévio.
+- O link individual é válido por 30 dias, não cria login e admite um único cadastro; somente o hash do token fica no banco. A criação do link é restrita a admin/super_admin.
+- O formulário exige empresa, segmento, cidade, responsável, e-mail, WhatsApp com DDD e autorização de contato. A etapa inicial é Contato feito e não pode ser escolhida externamente.
+- Cadastro da empresa, consumo do convite, convite de ofertas e auditorias são gravados na mesma transação. A trava do convite impede cadastros duplicados por reenvio.
+- Após cadastrar, a empresa escolhe Cadastrar oferta ou Entrar em contato com a equipe pelo WhatsApp (55 71 92001-7753, informado pelo responsável). A mensagem fica preenchida; o usuário decide enviá-la. A negociação e o fechamento acontecem com a equipe.
+- Ofertas externas continuam na caixa de análise administrativa; nenhuma campanha é publicada nem contrato confirmado automaticamente. O diagnóstico inclui company_registration_invites.

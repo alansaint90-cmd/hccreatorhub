@@ -30,6 +30,7 @@ export async function auditSystem() {
     schema.auditLog,
     schema.offerInvites,
     schema.companyOffers,
+    schema.companyRegistrationInvites,
   ];
   const expected = definitions.map(getTableName);
   let postgres: { ok: boolean; message: string } = {

@@ -19,6 +19,17 @@
   flex-wrap: wrap;
   margin: 20px 0;
 }
+.company-registration-choice {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.company-registration-choice p { margin: 12px 0 18px; line-height: 1.6; }
+.company-registration-choice h3 { margin: 12px 0; }
+.intake-share small { flex-basis: 100%; }
+.intake-share input { min-width: 0; width: 100%; }
+.public-offer .button { white-space: normal; text-align: center; }
+.company-intake-admin summary { cursor: pointer; padding: 16px 0; }
 .intake-controls label,
 .intake-share label {
   display: grid;

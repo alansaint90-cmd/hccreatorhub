@@ -94,6 +94,7 @@ export function Hub({ configured }: { configured: boolean }) {
     values?: Record<string, string>,
   ) =>
     setForm({
+      companyRegistration: command === "company" && !!data && ["admin", "super_admin"].includes(data.user.role),
       title,
       fields,
       schema,

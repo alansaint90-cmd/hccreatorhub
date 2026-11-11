@@ -6,6 +6,7 @@ import { z } from "zod";
 import { Button, Modal } from "./ui";
 import { money, todayBR } from "@/lib/format";
 import { BannerField } from "./banner-field";
+import { CompanyRegistrationLink } from "./company-registration-link";
 export type Field = {
   name: string;
   label: string;
@@ -15,6 +16,7 @@ export type Field = {
   help?: string;
 };
 export type FormSpec = {
+  companyRegistration?: boolean;
   title: string;
   description?: string;
   fields: Field[];
@@ -47,6 +49,7 @@ export function RecordForm({ spec, onClose }: { spec: FormSpec; onClose: () => v
   };
   return (
     <Modal title={spec.title} description={spec.description} onClose={close}>
+      {spec.companyRegistration && <CompanyRegistrationLink />}
       <form
         className="record-form"
         onSubmit={form.handleSubmit(async (d) => {

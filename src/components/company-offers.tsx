@@ -62,62 +62,72 @@ export function CompanyOffers({
     <section className="integration-panel company-intake-admin">
       <h2>Ofertas enviadas pelas empresas</h2>
       <p>
-        Cadastre a empresa e gere um link exclusivo. A empresa envia a proposta
-        sem login; somente a administração revisa e cria a campanha.
+        Para uma empresa nova, use Cadastrar empresa → Mandar link de cadastro
+        para a empresa. As ofertas enviadas após o cadastro aparecem aqui para
+        análise.
       </p>
-      <div className="intake-controls">
-        <label>
-          Empresa
-          <select value={company} onChange={(e) => setCompany(e.target.value)}>
-            <option value="">Selecione uma empresa</option>
-            {companies.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.name}
-              </option>
-            ))}
-          </select>
-        </label>
-        <Button
-          disabled={!company}
-          busy={busy}
-          onClick={() =>
-            setAction({
-              title: "Gerar novo link para esta empresa?",
-              run: generate,
-            })
-          }
-        >
-          Gerar link de ofertas
-        </Button>
-        <Button variant="outline" busy={busy} onClick={() => void load()}>
-          Atualizar ofertas
-        </Button>
-      </div>
-      <p className="muted">
-        Um novo link substitui o anterior da mesma empresa. Guarde o link após
-        gerar; ele é exibido somente neste momento.
-      </p>
-      {link && (
-        <div className="intake-share">
+      <details>
+        <summary>Links de ofertas para empresas já cadastradas</summary>
+        <div className="intake-controls">
           <label>
-            Link para enviar à empresa
-            <input value={link} readOnly onFocus={(e) => e.target.select()} />
+            Empresa
+            <select
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+            >
+              <option value="">Selecione uma empresa</option>
+              {companies.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
           </label>
           <Button
-            variant="outline"
-            onClick={() => {
-              void navigator.clipboard
-                .writeText(link)
-                .then(() => toast.success("Link copiado."))
-                .catch(() =>
-                  toast.error("Selecione e copie o link manualmente."),
-                );
-            }}
+            disabled={!company}
+            busy={busy}
+            onClick={() =>
+              setAction({
+                title: "Gerar novo link para esta empresa?",
+                run: generate,
+              })
+            }
           >
-            Copiar link
+            Gerar link de ofertas
+          </Button>
+          <Button variant="outline" busy={busy} onClick={() => void load()}>
+            Atualizar ofertas
           </Button>
         </div>
-      )}
+        <p className="muted">
+          Um novo link substitui o anterior da mesma empresa. Guarde o link após
+          gerar; ele é exibido somente neste momento.
+        </p>
+        {link && (
+          <div className="intake-share">
+            <label>
+              Link para enviar à empresa
+              <input value={link} readOnly onFocus={(e) => e.target.select()} />
+            </label>
+            <Button
+              variant="outline"
+              onClick={() => {
+                void navigator.clipboard
+                  .writeText(link)
+                  .then(() => toast.success("Link copiado."))
+                  .catch(() =>
+                    toast.error("Selecione e copie o link manualmente."),
+                  );
+              }}
+            >
+              Copiar link
+            </Button>
+          </div>
+        )}
+      </details>
+      <Button variant="outline" busy={busy} onClick={() => void load()}>
+        Atualizar ofertas recebidas
+      </Button>
       {error && <p role="alert">{error}</p>}
       {result && (
         <>

@@ -6,6 +6,7 @@ import { offerIntakeSchema } from "@/lib/offer-validation";
 import { submitCompanyOffer } from "@/lib/offer-actions";
 import { Button } from "./ui";
 import { Brand } from "./brand";
+import { companyWhatsApp } from "@/lib/company-registration-validation";
 
 export function PublicOfferForm({
   token,
@@ -92,6 +93,7 @@ export function PublicOfferForm({
               A HC Agency vai analisar as informações e entrar em contato pelo
               e-mail informado. Obrigado pela conexão.
             </p>
+            <a className="button primary" href={companyWhatsApp(company)} target="_blank" rel="noopener noreferrer">Conversar com a equipe pelo WhatsApp</a>
           </div>
         ) : (
           <form
