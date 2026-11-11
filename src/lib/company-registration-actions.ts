@@ -13,7 +13,10 @@ import { digest } from "./security";
 import { errorMessage } from "./errors";
 import { offerToken, isAdministrator } from "./offer-validation";
 import { companyRegistrationSchema } from "./company-registration-validation";
-import { completeCompanyRegistration } from "./company-registration-service";
+import {
+  completeCompanyRegistration,
+  completePublicCompanyRegistration,
+} from "./company-registration-service";
 import { sharedAttempt } from "./redis";
 
 export async function createCompanyRegistrationInvite() {
@@ -28,13 +31,11 @@ export async function createCompanyRegistrationInvite() {
         .insert(invites)
         .values({ tokenHash: digest(token), expiresAt, modifiedBy: user.id })
         .returning();
-      await tx
-        .insert(auditLog)
-        .values({
-          action: "link de cadastro de empresa criado",
-          entityId: invite.id,
-          modifiedBy: user.id,
-        });
+      await tx.insert(auditLog).values({
+        action: "link de cadastro de empresa criado",
+        entityId: invite.id,
+        modifiedBy: user.id,
+      });
     });
     return { ok: true as const, path: `/cadastrar-empresa/${token}` };
   } catch (error) {
@@ -74,6 +75,24 @@ export async function registerInvitedCompany(token: unknown, input: unknown) {
       ok: true as const,
       offerPath: `/enviar-oferta/${offerTokenRaw}`,
       name: data.name,
+    };
+  } catch (error) {
+    return { ok: false as const, error: errorMessage(error) };
+  }
+}
+
+export async function registerPublicCompany(input: unknown) {
+  try {
+    const data = companyRegistrationSchema.parse(input);
+    const ip =
+      (await headers()).get("x-forwarded-for")?.split(",")[0] || "local";
+    await sharedAttempt(`company-registration:${digest(ip)}`, 20, 3600);
+    const raw = randomBytes(32).toString("hex");
+    await completePublicCompanyRegistration(getDb(), data, raw);
+    return {
+      ok: true as const,
+      name: data.name,
+      offerPath: `/enviar-oferta/${raw}`,
     };
   } catch (error) {
     return { ok: false as const, error: errorMessage(error) };

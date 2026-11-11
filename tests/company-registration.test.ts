@@ -11,7 +11,10 @@ import {
   companyRegistrationSchema,
   companyWhatsApp,
 } from "../src/lib/company-registration-validation";
-import { completeCompanyRegistration } from "../src/lib/company-registration-service";
+import {
+  completeCompanyRegistration,
+  completePublicCompanyRegistration,
+} from "../src/lib/company-registration-service";
 config({ quiet: true });
 const sample = {
   name: "Empresa QA",
@@ -61,16 +64,14 @@ test(
           const actor = randomUUID(),
             raw = randomBytes(32).toString("hex"),
             offerRaw = randomBytes(32).toString("hex");
-          await tx
-            .insert(schema.users)
-            .values({
-              id: actor,
-              name: "Admin QA",
-              email: `${actor}@example.com`,
-              password: "hash QA",
-              role: "admin",
-              modifiedBy: actor,
-            });
+          await tx.insert(schema.users).values({
+            id: actor,
+            name: "Admin QA",
+            email: `${actor}@example.com`,
+            password: "hash QA",
+            role: "admin",
+            modifiedBy: actor,
+          });
           const [invite] = await tx
             .insert(schema.companyRegistrationInvites)
             .values({
@@ -130,6 +131,87 @@ test(
       );
     } finally {
       await sql.end();
+    }
+  },
+);
+
+test(
+  "PostgreSQL: link fixo cadastra várias empresas sem convite e mantém ofertas isoladas",
+  { skip: !process.env.DATABASE_URL },
+  async () => {
+    const client = postgres(process.env.DATABASE_URL!, { max: 1 }),
+      db = drizzle(client, { schema });
+    const rollback = new Error("rollback link fixo");
+    try {
+      await assert.rejects(
+        db.transaction(async (tx) => {
+          const actor = randomUUID();
+          await tx
+            .insert(schema.users)
+            .values({
+              id: actor,
+              name: "Admin QA",
+              email: actor + "@example.com",
+              password: "hash QA",
+              role: "admin",
+              modifiedBy: actor,
+            });
+          const tokens = [
+            randomBytes(32).toString("hex"),
+            randomBytes(32).toString("hex"),
+          ];
+          const typedDb = tx as unknown as ReturnType<
+            typeof drizzle<typeof schema>
+          >;
+          const names = ["Empresa A QA " + actor, "Empresa B QA " + actor];
+          for (let i = 0; i < 2; i++) {
+            await completePublicCompanyRegistration(
+              typedDb,
+              companyRegistrationSchema.parse({ ...sample, name: names[i] }),
+              tokens[i],
+            );
+            const [company] = await tx
+              .select()
+              .from(schema.companies)
+              .where(eq(schema.companies.name, names[i]));
+            assert.equal(company.stage, "Contato feito");
+            const [invite] = await tx
+              .select()
+              .from(schema.offerInvites)
+              .where(eq(schema.offerInvites.companyId, company.id));
+            assert.equal(invite.tokenHash, digest(tokens[i]));
+            const logs = await tx
+              .select()
+              .from(schema.auditLog)
+              .where(eq(schema.auditLog.entityId, company.id));
+            assert.equal(logs.length, 1);
+            const registrations = await tx
+              .select()
+              .from(schema.companyRegistrationInvites)
+              .where(
+                eq(schema.companyRegistrationInvites.companyId, company.id),
+              );
+            assert.equal(registrations.length, 0);
+          }
+          await assert.rejects(
+            completePublicCompanyRegistration(
+              typedDb,
+              companyRegistrationSchema.parse({ ...sample, name: names[0] }),
+              randomBytes(32).toString("hex"),
+            ),
+            /já está cadastrada/,
+          );
+          const accounts = await tx
+            .select()
+            .from(schema.users)
+            .where(eq(schema.users.email, sample.email));
+          assert.equal(accounts.length, 0);
+          throw rollback;
+        }),
+        (error) => error === rollback,
+      );
+    } finally {
+      await client.end();
     }
   },
 );

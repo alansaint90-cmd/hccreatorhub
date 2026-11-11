@@ -62,9 +62,8 @@ export function CompanyOffers({
     <section className="integration-panel company-intake-admin">
       <h2>Ofertas enviadas pelas empresas</h2>
       <p>
-        Para uma empresa nova, use Cadastrar empresa → Mandar link de cadastro
-        para a empresa. As ofertas enviadas após o cadastro aparecem aqui para
-        análise.
+        Para uma empresa nova, use Cadastrar empresa → Copiar link de cadastro.
+        As ofertas enviadas após o cadastro aparecem aqui para análise.
       </p>
       <details>
         <summary>Links de ofertas para empresas já cadastradas</summary>

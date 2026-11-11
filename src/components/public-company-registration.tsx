@@ -6,11 +6,14 @@ import {
   companyRegistrationSchema,
   companyWhatsApp,
 } from "@/lib/company-registration-validation";
-import { registerInvitedCompany } from "@/lib/company-registration-actions";
+import {
+  registerInvitedCompany,
+  registerPublicCompany,
+} from "@/lib/company-registration-actions";
 import { Brand } from "./brand";
 import { Button } from "./ui";
 
-export function PublicCompanyRegistration({ token }: { token: string }) {
+export function PublicCompanyRegistration({ token }: { token?: string }) {
   const [done, setDone] = useState<{ name: string; offerPath: string } | null>(
     null,
   );
@@ -77,7 +80,9 @@ export function PublicCompanyRegistration({ token }: { token: string }) {
               onSubmit={form.handleSubmit(async (values) => {
                 setError("");
                 try {
-                  const r = await registerInvitedCompany(token, values);
+                  const r = token
+                    ? await registerInvitedCompany(token, values)
+                    : await registerPublicCompany(values);
                   if (r.ok) setDone({ name: r.name, offerPath: r.offerPath });
                   else setError(r.error);
                 } catch {

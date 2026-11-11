@@ -73,9 +73,9 @@ No navegador foram exercitados login, cadastro de empresa e oportunidade, cadast
 - Creators sem cidade ou nicho recebem uma chamada para completar o perfil na visão geral. O bloqueio de candidatura por perfil incompleto permanece no servidor.
 
 ### Cadastro externo de empresas
-- Em Empresas → Cadastrar empresa, a administração pode preencher manualmente ou gerar e copiar um link de cadastro para uma empresa nova, sem cadastro prévio.
-- O link individual é válido por 30 dias, não cria login e admite um único cadastro; somente o hash do token fica no banco. A criação do link é restrita a admin/super_admin.
+- Em Empresas → Cadastrar empresa, o link fixo /cadastrar-empresa já aparece pronto para copiar e enviar. O mesmo endereço serve para várias empresas, sem gerar convite e sem cadastro prévio. A opção manual permanece.
+- O link público fixo não expira nem cria login. Links individuais anteriormente emitidos continuam funcionando com suas restrições originais. O formulário nunca revela dados de empresas já cadastradas.
 - O formulário exige empresa, segmento, cidade, responsável, e-mail, WhatsApp com DDD e autorização de contato. A etapa inicial é Contato feito e não pode ser escolhida externamente.
-- Cadastro da empresa, consumo do convite, convite de ofertas e auditorias são gravados na mesma transação. A trava do convite impede cadastros duplicados por reenvio.
+- Empresa, convite exclusivo de ofertas e auditorias são gravados na mesma transação. O servidor escolhe um administrador ativo como responsável técnico e registra a origem externa; o visitante não escolhe permissões nem acessa cadastros existentes. Duplicação de nome é bloqueada sem alterar a empresa existente. Há limite Redis de 20 tentativas/IP/hora e cota persistente de 100 cadastros externos/hora no PostgreSQL com trava transacional, mesmo sem Redis.
 - Após cadastrar, a empresa escolhe Cadastrar oferta ou Entrar em contato com a equipe pelo WhatsApp (55 71 92001-7753, informado pelo responsável). A mensagem fica preenchida; o usuário decide enviá-la. A negociação e o fechamento acontecem com a equipe.
 - Ofertas externas continuam na caixa de análise administrativa; nenhuma campanha é publicada nem contrato confirmado automaticamente. O diagnóstico inclui company_registration_invites.
